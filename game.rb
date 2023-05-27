@@ -2,8 +2,6 @@ require_relative 'game.rb'
 
 class Game
 
-  @moves = [1, 0, -1, 0, 0, 1, 0, -1, 1, 1, -1, -1, 1, -1, -1, 1]
-
   def initialize(piece = 'X')
     @piece = piece
     @size = 3
