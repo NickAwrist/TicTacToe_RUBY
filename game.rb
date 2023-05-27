@@ -55,14 +55,15 @@ class Game
 
   def make_move?(player)
 
-    puts "\nInput a row and column. EX: 2 ENTER 1  for row 2 column 1"
-    row = gets.to_i
-    col = gets.to_i
+    puts "\nInput a row and column. EX: 2 1  for row 2 column 1"
+    input_arr = gets.chomp.split.map { |e| e.to_i }
+    row = input_arr[0]
+    col = input_arr[1]
 
-    until @board[row][col] != 'X' && @board[row][col] != 'O' do
-      puts "\nThat spot is taken, please enter a new spot"
-      row = gets.to_i
-      col = gets.to_i
+    until valid_move?(row, col) do
+      input_arr = gets.chomp.split.map { |e| e.to_i }
+      row = input_arr[0]
+      col = input_arr[1]
     end
 
     # Place piece on the board and increment total_moves
@@ -86,6 +87,21 @@ class Game
 
     true
 
+  end
+
+  def valid_move?(row, col)
+
+    if row >= @size or col >=@size
+      puts "Out of bounds. Please enter a new position."
+      return false
+    end
+
+    if @board[row][col] == 'X' or @board[row][col] == 'O'
+      puts "Spot is already taken. Pleas enter a new position."
+      return false
+    end
+
+    true
   end
 
   # Check if player has won
